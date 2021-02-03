@@ -29,24 +29,23 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 #
 # Your goal is to write the score method
 def score(dice)
-  arr = dice.sort
+  arr = dice
   score = 0
-  arr.each do |x|
+  arr.reverse_each do |x|
     
     if arr.count(x) >= 3
       if x == 1
         score += 1000
         oneleft = arr.count(x) - 3
         score += (oneleft * 100)
-        arr.delete(x)
-        puts arr
+        arr.reject! {|i| i == x}
       elsif x != 1
         score += (x * 100)
         otherleft = arr.count(x) - 3
         if x == 5
           score += otherleft * 50
         end
-        arr.delete(x)
+         arr.reject! {|i| i == x}
       end
       
     else
